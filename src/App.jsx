@@ -3,8 +3,17 @@ import Login from './routes/Login'
 import Home from './routes/Home'
 import Navbar from './components/Navbar'
 import RequireAuth from './components/RequireAuth'
+import Register from './routes/register'
+import { useContext } from 'react'
+import { userContext } from './context/UserProvider'
 
 const App = () => {
+
+  const {user} = useContext(userContext);
+
+  if(user === false){
+    return <p>Loading...</p>
+  }
 
   return (
     <>
@@ -17,6 +26,7 @@ const App = () => {
           </RequireAuth>
         } />
           <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
       </Routes>
     </>
   )
