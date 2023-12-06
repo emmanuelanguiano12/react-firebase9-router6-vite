@@ -6,6 +6,8 @@ import { erroresFirebase } from "../utils/erroresFirebase";
 import FormError from "../components/FormError";
 import { formValidate } from "../utils/formValidate";
 import FormInput from "../components/FormInput";
+import TitleForm from "../components/TitleForm";
+import Button from "../components/Button";
 
 export const Register = () => {
   
@@ -21,16 +23,15 @@ export const Register = () => {
                 navegate('/')
             } catch (error) {
                 console.log(error.code)
-                setError("firebase", {
-                    message: erroresFirebase(error.code),
-                });
+                const {code, message} = erroresFirebase(error.code);
+                setError(code, {message});
             }
         };
 
 
     return (
     <>
-        <h1>Register</h1>
+        <TitleForm text="Register" />
         <FormError error={errors.firebase} />
         <form onSubmit={handleSubmit(onSubmit)}>
             <FormInput 
@@ -40,6 +41,8 @@ export const Register = () => {
                     required,
                     pattern: patternEmail,
                 })}
+                label = "Ingresa tu correo"
+                error={errors.email}
             >
                 <FormError error={errors.email} />
             </FormInput>
@@ -51,6 +54,8 @@ export const Register = () => {
                     minLength,
                     validate: validateTrim,
                 })}
+                label = "Ingresa tu password"
+                error = {errors.password}
             >
                 <FormError error={errors.password} />
             </FormInput>
@@ -59,13 +64,15 @@ export const Register = () => {
                 type="password" 
                 placeholder="Confirme Password" 
                 {...register("repassword", {
-                    validate: validateEquals(getValues),
+                    validate: validateEquals(getValues("password")),
                 })}
+                label = "Confirme password"
+                error = {errors.repassword}
             >
                 <FormError error={errors.repassword} />
             </FormInput>
             
-            <button type="submit">Register</button>
+            <Button text="Register" type="submit" />
         </form>
     </>
   )

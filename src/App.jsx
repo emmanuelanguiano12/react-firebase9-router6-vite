@@ -6,6 +6,7 @@ import RequireAuth from './components/RequireAuth'
 import Register from './routes/register'
 import { useContext } from 'react'
 import { userContext } from './context/UserProvider'
+import LayoutContainerForm from './components/LayoutContainerForm'
 
 const App = () => {
 
@@ -18,15 +19,16 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <h1>APP</h1>
       <Routes>
         <Route path='/' element={
           <RequireAuth>
             <Home />
           </RequireAuth>
         } />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+          <Route path='/' element={<LayoutContainerForm />} >
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+          </Route> 
       </Routes>
     </>
   )
