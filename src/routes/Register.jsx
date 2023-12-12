@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { userContext } from "../context/UserProvider";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -8,23 +8,28 @@ import { formValidate } from "../utils/formValidate";
 import FormInput from "../components/FormInput";
 import TitleForm from "../components/TitleForm";
 import Button from "../components/Button";
+import ButtonLoader from "../components/ButtonLoader";
 
 export const Register = () => {
   
     const {registerUser} = useContext(userContext); 
     const navegate = useNavigate();
     const {required, patternEmail, minLength, validateTrim, validateEquals} = formValidate();
+    const [loading, setLoading] = useState(false);
 
     const {register, handleSubmit, formState: {errors}, getValues, setError} = useForm();
 
     const onSubmit = async({email, password}) => {
             try {
+                setLoading(true);
                 await registerUser(email, password)
                 navegate('/')
             } catch (error) {
                 console.log(error.code)
                 const {code, message} = erroresFirebase(error.code);
                 setError(code, {message});
+            } finally {
+                setLoading(false)
             }
         };
 
@@ -71,8 +76,7 @@ export const Register = () => {
             >
                 <FormError error={errors.repassword} />
             </FormInput>
-            
-            <Button text="Register" type="submit" />
+            <Button text="Register" type="submit" loading={loading} />
         </form>
     </>
   )
