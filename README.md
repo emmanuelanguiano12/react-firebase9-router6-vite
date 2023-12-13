@@ -1,8 +1,17 @@
-# React + Vite
+# URL Shortener App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+URL Shortener App is a web application that allows users to shorten long URLs, providing a convenient way to share links. This application is built with React, styled with Tailwind CSS, and utilizes Firebase for data storage and authentication.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+
+- React
+- Tailwind CSS
+- Firebase
+- Hooks from React
+
+## Deploy
+
+https://react-login-2023.web.app/
+
