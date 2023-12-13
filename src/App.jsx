@@ -9,6 +9,7 @@ import { useContext } from 'react'
 import { userContext } from './context/UserProvider'
 import LayoutContainerForm from './components/layouts/LayoutContainerForm'
 import NotFound from './routes/NotFound'
+import LayoutRedirect from './components/layouts/LayoutRedirect'
 
 const App = () => {
 
@@ -33,7 +34,10 @@ const App = () => {
             <Route path='/register' element={<Register />} />
           </Route> 
 
-          <Route path='*' element={<NotFound />} />
+          <Route path='/:nanoid' element={<LayoutRedirect />}>
+            <Route index element={<NotFound />} />
+          </Route>
+
       </Routes>
     </>
   )
